@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { Router } from "react-router";
 import Element from "./Element";
 
 class Button extends Component{
@@ -13,10 +14,13 @@ class Button extends Component{
             zIndex:'2'
         }
 
+        const Clickme = () => {
+            Router.push("/")
+        }
 
         return(
             <div>
-                <button style = {buttonStyle}>Previous</button>
+                <button style = {buttonStyle} onClick = {Clickme}>Previous</button>
             </div>
         );
     }

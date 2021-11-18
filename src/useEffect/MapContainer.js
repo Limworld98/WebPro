@@ -129,9 +129,11 @@ const MapContainer = ({ searchPlace }) => {
 
     return (
         <div id='myMap' style={{
+            position: "absolute",
             width: '50%', 
-            height: '90vh',
-            top:'10vh',
+            margin : '20px',
+            bottom : '20px',
+            height: '85vh',
             zIndex:'1'
         }}></div>
     );
