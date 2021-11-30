@@ -3,6 +3,8 @@ import { Component } from 'react/cjs/react.production.min';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Main from './pages/Main';
+import DatePicker from './pages/DatePicker';
+
 class App extends Component {
   render(){
     return (
