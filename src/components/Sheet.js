@@ -1,5 +1,7 @@
 import React, {Component} from "react";
-
+import Element from "./Element";
+import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import store2 from "../store2"
 
 class Sheet extends Component{
     render(){
@@ -11,9 +13,45 @@ class Sheet extends Component{
             padding:"5px"
         }
         
+        const handleChange = (result) => {
+            
+            if (!result.destination) return;
+            const items = [...ScheduleList];
+            const [reorderedItem] = items.splice(result.source.index, 1);
+            items.splice(result.destination.index, 0, reorderedItem);
+            store2.dispatch({type:'INCREMENT',li:items, num:this.props.cnt});
+        };  
+
+        const ScheduleList = this.props.li;
+
         return(
-            <div style={tmpStyle}>
-                <h4>{this.props.e}</h4>
+            <div style={tmpStyle}><h3>{this.props.e}</h3>
+                <DragDropContext onDragEnd={handleChange}>
+                    <Droppable droppableId="Schedule1" index={0}>
+                        {(provided, snapshot) => (
+                        <ul
+                        className={'list', snapshot.isDraggingOver && 'draggingOver'}
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                        >
+                        {ScheduleList.map(({ id, title }, index) => (
+                            <Draggable key={id} draggableId={id} index={index}>
+                            {(provided, snapshot) => (
+                             <div
+                             style={provided.dragHandleProps.style}   
+                             ref={provided.innerRef}
+                                {...provided.dragHandleProps}
+                                {...provided.draggableProps}
+                                >
+                                <Element e={title}></Element>
+                                </div>
+                            )}
+                            </Draggable>
+                            ))}{provided.placeholder}
+                        </ul>
+                        )}
+                    </Droppable>
+                </DragDropContext>
             </div>
         );
     }

@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-import { DndProvider, useDrag } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import Sheet from "./Sheet";
 
 class Schedule extends Component{
@@ -11,8 +9,8 @@ class Schedule extends Component{
             border:"1px solid black",
             margin:"10px",
             position:"absolute",
-            left:"60%",
-            top:"13vh",
+            left:"-140%",
+            top:"-1vh",
             zIndex:'2',
             backgroundColor:'white',
             overflow:"auto"  
@@ -24,11 +22,9 @@ class Schedule extends Component{
         var i = 0;
          
         const aList = SSList.map(title => (
-            <Sheet e={this.props.start + i} li={SSList[i++]}></Sheet>              
+            <Sheet e={this.props.start + i} cnt={i} li={SSList[i++]}></Sheet>            
         ))
             
-        
-
         return(
             <div style={tmpStyle}>
                 {aList}       
