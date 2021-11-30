@@ -8,7 +8,6 @@ export default createStore(function(state, action){
         return{id:action.id, name:action.name}
     }
     
-    
     return state;
 }, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
