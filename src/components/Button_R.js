@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Element from "./Element";
 
+
 class Button extends Component{
   
     render(){
@@ -8,9 +9,10 @@ class Button extends Component{
         const buttonStyle={
             position:"absolute",
             margin :"10px",
-            right:"0px",
+            right:"22px",
             bottom : "0px",
-            zIndex:'2'
+            padding:"3px 30px",
+            zIndex:'3'
         }
 
 

@@ -10,19 +10,19 @@ const _ = require('lodash');
 const Calendar = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [startDate2, setStartDate2] = useState(new Date());
-    const years = _.range(1990, getYear(new Date()) + 1, 1); // 수정
+    const years = _.range(2021, getYear(new Date()) + 10, 1); // 수정
     const months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']; 
 
     const tstyle2 = {
         position:"absolute",
-        left:"41%",
-        top:"40vh"
+        left:"46%",
+        top:"40%"
     }
 
     const tstyle4 = {
         position:"absolute",
-        left:"55%",
-        top:"40vh"
+        left:"46%",
+        top:"45%"
     }
 
   return (

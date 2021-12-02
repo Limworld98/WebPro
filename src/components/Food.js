@@ -66,22 +66,28 @@ class Food extends Component {
         const FoodList=this.props.ffList
         
         const handleChange = (result) => {
-            if(!result.destination) {
+        
+            if((!result.destination)) {
                 if(result.source.droppableId !== "Food"){
-                    const num = result.source.droppableId;
+                    const num = result.source.droppableId - 1;
                     var items = [...this.state.ScheduleList[result.source.droppableId - 1]];
                     items.splice(result.source.index, 1);
                     const tmpList = this.state.ScheduleList;
-                    tmpList[num - 1] = items;
+                    tmpList[num] = items;
+
+                    const sizeList = this.state.ScheduleSize
+                    sizeList[num] = sizeList[num] - 1;  
                     this.setState({
-                        ScheduleList:tmpList
-                    });                   
+                        ScheduleList:tmpList,
+                        ScheduleSize:sizeList
+                    });
+                    store3.dispatch({type:'INCREMENT', li:this.state.ScheduleList, size:this.state.ScheduleSize, num:1})                 
                 }
                 else{
-                    store2.dispatch({type:'INCREMENT', id:1, index:result.source.index})
+                    store2.dispatch({type:'INCREMENT', id:0, index:result.source.index})
                 }
             }
-            else if((result.destination.droppableId === "Food")){}
+            else if(result.destination.droppableId === "Food"){}
             else if(result.destination.droppableId === result.source.droppableId){
                 const items = [...this.state.ScheduleList[result.destination.droppableId - 1]];
                 const [reorderedItem] = items.splice(result.source.index, 1);
@@ -92,21 +98,35 @@ class Food extends Component {
                 this.setState({
                     ScheduleList:tmpList
                 });
+                store3.dispatch({type:'INCREMENT', li:this.state.ScheduleList, size:this.state.ScheduleSize, num:1})
                 
             }else if((result.destination.droppableId !== "Food")){
+                var c = []
+                if(result.source.droppableId !== "Food"){
+                    const tmp = this.state.ScheduleList
+                    c = tmp[result.source.droppableId - 1][result.source.index].content
+                }
                 
                 var sizeList = this.state.ScheduleSize;
-                const num = result.destination.droppableId-1;
+                var num = result.destination.droppableId-1;
                 const name = result.draggableId;
                 var _contents = this.state.ScheduleList;
-                _contents[num][this.state.ScheduleSize[num]] = {id:(String(num*10) + String(sizeList[num])), title:String(name + "__" + (String(num*10) + String(sizeList[num]))), content:[]};              
+                _contents[num][this.state.ScheduleSize[num]] = {id:(String(num*10) + String(sizeList[num])), title:String(name + "_" + (String(num*10) + String(sizeList[num]))), content:c};                
                 sizeList[num] = sizeList[num] + 1;
+
+                if(result.source.droppableId !== "Food"){
+                    num = result.source.droppableId - 1;
+                    var items = [...this.state.ScheduleList[result.source.droppableId - 1]];
+                    items.splice(result.source.index, 1);            
+                    _contents[num] = items;
+                    sizeList[num] = sizeList[num] - 1;
+                }
 
                 this.setState({
                 ScheduleList:_contents,
                 ScheduleSize:sizeList
                 });
-               
+                store3.dispatch({type:'INCREMENT', li:this.state.ScheduleList, size:this.state.ScheduleSize, num:1})
             }
         };      
         
@@ -114,13 +134,13 @@ class Food extends Component {
             <DragDropContext onDragEnd={result => handleChange(result)}>    
                 <button onClick={function(){
                     store3.dispatch({type:'INCREMENT', li:this.state.ScheduleList, size:this.state.ScheduleSize, num:0})
-                }.bind(this)}>Stay</button>
+                }.bind(this)}>숙소</button>
                 <button onClick={function(){
                     store3.dispatch({type:'INCREMENT', li:this.state.ScheduleList, size:this.state.ScheduleSize, num:1}) 
-                }.bind(this)}>Food</button>
+                }.bind(this)}>식당</button>
                 <button onClick={function(){
                     store3.dispatch({type:'INCREMENT', li:this.state.ScheduleList, size:this.state.ScheduleSize, num:2})
-                }.bind(this)}>Play</button>
+                }.bind(this)}>관광</button>
             <div>
                 <div style={tmpStyle2}>
                     {SSList.map((tList) => {
@@ -150,7 +170,7 @@ class Food extends Component {
                         </div>
                     );})}
                 </div>
-                <div style={tmpStyle}><h3><Printer e ={"Food"}></Printer></h3>                    
+                <div style={tmpStyle}><h3><Printer e ={"식당"}></Printer></h3>                    
                         <Droppable droppableId="Food">
                             {(provided) => (
                             <div
