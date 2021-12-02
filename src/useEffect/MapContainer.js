@@ -84,21 +84,21 @@ const MapContainer = ({ searchPlace }) => {
             contentt.style.cssText = 'background: white; border: 1px solid black';
 
             var StayBtn = document.createElement('button');
-            StayBtn.innerHTML = '+Stay';
+            StayBtn.innerHTML = '+숙소';
             StayBtn.style.cssText = 'position: absolute;left: -50px;bottom: 70px;';
             StayBtn.onclick = function () {
               store.dispatch({type:'INCREMENT',id:1,name:place.place_name});
             }.bind(this);
 
             var FoodBtn = document.createElement('button');
-            FoodBtn.innerHTML = '+Food';
+            FoodBtn.innerHTML = '+식당';
             FoodBtn.style.cssText = 'position: absolute;left: +3px;bottom: 70px;';
             FoodBtn.onclick = function () {
               store.dispatch({type:'INCREMENT',id:2,name:place.place_name});
             }.bind(this);
 
             var PlayBtn = document.createElement('button');
-            PlayBtn.innerHTML = '+Play';
+            PlayBtn.innerHTML = '+관광';
             PlayBtn.style.cssText = 'position: absolute;left: +60px;bottom: 70px;';
             PlayBtn.onclick = function () {
               store.dispatch({type:'INCREMENT',id:3,name:place.place_name});
@@ -130,10 +130,10 @@ const MapContainer = ({ searchPlace }) => {
     return (
         <div id='myMap' style={{
             position: "absolute",
-            width: '50%', 
+            width: '60%', 
             margin : '20px',
             bottom : '20px',
-            height: '85vh',
+            height: '80vh',
             zIndex:'1'
         }}></div>
     );

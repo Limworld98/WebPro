@@ -19,10 +19,12 @@ const SearchPlace = () => {
   
   const tStyle={
     position:"absolute",
-    top:"12vh",
-    left:"2%",
-    zIndex:'2'
+    top:"11%",
+    left:"1%",
+    zIndex:'2',
   }
+
+  
 
   return (
     <>
