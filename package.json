@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@react-pdf/renderer": "^2.0.21",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "immutability-helper": "^3.1.1",
+    "jspdf": "^2.4.0",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",
@@ -22,6 +26,8 @@
     "react-scripts": "4.0.3",
     "redux": "^4.1.2",
     "request": "^2.88.2",
+    "styled-components": "^5.3.3",
+    "sweetalert": "^2.1.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
