@@ -5,14 +5,16 @@ import SearchPlace from '../useEffect/SearchPlace';
 import store from '../store';
 import store2 from '../store2';
 import store3 from '../store3';
-import store5 from '../store5';
+import store4 from '../store4';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import RButton from '../components/Button_R';
 import LButton from '../components/Button_L';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Printer from '../components/Printer';
 
 class Main extends Component {
   state = {
+    location:"",
     StayList:[],
     FoodList:[],
     PlayList:[],
@@ -86,18 +88,51 @@ class Main extends Component {
       this.setState({c:store3.getState().num, ScheduleList:store3.getState().li, ScheduleSize:store3.getState().size});
     }.bind(this));
 
+    store4.subscribe(function(){
+      if(store4.getState().id === 0){
+          this.setState({start:store4.getState().date});
+      }
+      else if(store4.getState().id === 1){
+          this.setState({end:store4.getState().date});
+      }
+    }.bind(this));
+
     this.StaySize = 0;
     this.FoodSize = 0;
     this.PlaySize = 0;   
   }
   
   render(){
+    this.state.start =this.props.start 
+    this.state.end = this.props.end
+    
+    const tmpStyle = {
+      position:"absolute",
+      left:"75%",
+      top:"7vh"
+    }
+
+    const barStyle={
+      display:"inline-block",
+      width:"100%",
+      height:"40px",
+      background:"skyblue",
+      padding: "10px",
+      fontSize: "40px",
+      fontWeight: "bold",
+      fontFamily: "Arial",
+      color: "white",
+      margin_top: "auto",
+      margin_bottom: "auto",
+      zindex:"4"
+    }
+
     return (
       <div className="App">
+        <center><div style = {barStyle}>Travel Planner</div></center>
+        <div style={tmpStyle}><h2>{this.props.location + " 여행 계획표"}</h2></div>
         <SearchPlace></SearchPlace>
-        <RButton></RButton>
-        <LButton></LButton>
-
+        <Link to ="/Final"><RButton></RButton></Link>
         <ViewList sList={this.state.StayList} fList={this.state.FoodList} pList={this.state.PlayList} start={this.state.start} end={this.state.end} ScheduleList={this.state.ScheduleList}> </ViewList>
      
       </div>
